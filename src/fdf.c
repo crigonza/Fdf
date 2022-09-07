@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:25:36 by crigonza          #+#    #+#             */
-/*   Updated: 2022/09/06 18:01:53 by crigonza         ###   ########.fr       */
+/*   Updated: 2022/09/06 20:02:34 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,33 +76,41 @@ int get_height(char *file)
     close(fd);
     return(height);
 }
-void    parse_map(int *map_line, char **split_line)
-{
-    int i;
 
-    i = 0;
-    while(split_line[i])
-    {
-        map_line[i] = ft_atoi(split_line[i]);
-        i++;
-    }
+int	**alloc_map(int height, int width)
+{
+	int	**tmp;
+	int	i;
+
+	i = 0;
+	tmp = ft_calloc(height, sizeof(int *));
+	if (!tmp)
+		return (0);
+	while (i < height)
+	{
+		tmp[i] = ft_calloc(width, sizeof(int));
+		if (!tmp[i])
+		{
+			return (0);
+		}
+		i++;
+	}
+	return (tmp);
 }
 
 void    parser(t_fdf *fdf, char *file)
 {
     char    *map_line;
     char    **split_line;
-    //int     **map;
     int     i;
     int     j;
     int     fd;
     
     fdf->width = get_width(file);
     fdf->height = get_height(file);
-    fdf->map = malloc(sizeof(int) * (fdf->height * fdf->width));
+    fdf->map = alloc_map(fdf->height, fdf->width);
     fd = open(file, O_RDONLY);
     i = 0;
-    //map = malloc(sizeof(int) * (fdf->height * fdf->width));
     while (i < fdf->height)
     {
         j = 0;
@@ -111,17 +119,12 @@ void    parser(t_fdf *fdf, char *file)
         while (j < fdf->width)
         {
             fdf->map[i][j] = ft_atoi(split_line[j]);
-            //free(split_line[j]);
-            //printf("-%d", ft_atoi(split_line[j]));
             j++;
         }
-        //printf("\n");
-        //parse_map(fdf->map[i], split_line);
         i++; 
         free(map_line);
         free(split_line);
     }
-    //free(map_line);
     close (fd);
 }
 
@@ -140,8 +143,9 @@ int main(int argc, char **argv)
     parser(fdf, argv[1]);
     printf("%d\n", fdf->width);
     printf("%d\n", fdf->height);
-    //fdf->map[0][0] = 1992;
-   /*  while (i < 11)
+    fdf->mlx = mlx_init(WIN_W, WIN_H, "Fdf", true);
+    mlx_loop(fdf->mlx);
+    while (i < 11)
     {
         j = 0;
         while (j < 19)
@@ -151,6 +155,6 @@ int main(int argc, char **argv)
         }
         printf("\n");
         i++;
-    } */
+    }
     return(0);
 }
