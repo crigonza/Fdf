@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/07 11:16:53 by crigonza          #+#    #+#             */
-/*   Updated: 2022/05/12 17:17:37 by crigonza         ###   ########.fr       */
+/*   Updated: 2022/09/12 19:32:17 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 5
+#  define BUFFER_SIZE 2048
 # endif
 
 char	*get_next_line(int fd);
