@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:25:36 by crigonza          #+#    #+#             */
-/*   Updated: 2022/09/13 21:38:10 by crigonza         ###   ########.fr       */
+/*   Updated: 2022/09/15 08:10:51 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int get_width(char *file)
     int width;
 
     i = 0;
-    width = 0;
+    width = 1;
     fd = open(file, O_RDONLY);
     line = get_next_line(fd);
     while(line[i] != '\n')
     {
-        if (line[i] == ' ' && line[i+1] != ' ')
+        if (line[i] == ' ' && line[i + 1] != ' ' && line[i + 1] != '\n')
             width++;
         i++;
     }
@@ -61,18 +61,20 @@ int get_width(char *file)
 
 int get_height(char *file)
 {
-    char    *line;
+    char    c;
+    int res;
     int fd;
     int height;
 
-    height = 0;
+    height = -1;
+    res = 1;
     fd = open(file, O_RDONLY);
-    while(line = get_next_line(fd))
+    while(res > 0)
     {
-        free(line);
-        height++;
+        res = read(fd, &c, 1);
+        if (c == '\n')
+            height++;
     }
-    free(line);
     close(fd);
     return(height);
 }
@@ -98,8 +100,6 @@ int	**alloc_map(int height, int width)
 	return (tmp);
 }
 
-//void    split_line()
-
 void    parser(t_fdf *fdf, char *file)
 {
     char    *map_line;
@@ -119,11 +119,11 @@ void    parser(t_fdf *fdf, char *file)
         map_line = get_next_line(fd);
         //printf("%s", map_line);
         split_line = ft_split(map_line, ' ');
-        while (split_line[j])
+        /* while (split_line[j])
         {
             printf("%s", split_line[j]);
             j++;
-        }
+        } */
         //printf("\n");
         j = 0;
         while (split_line[j])
@@ -159,21 +159,23 @@ void    parallel_view(t_coords *coords, int z)
 
 void    isometric_view(t_coords *coords, int z)
 {
-    coords->x = (int)round((coords->x - coords->y) * cos(M_PI / 3));
-    coords->y = (int)round((coords->x + coords->y) * sin(M_PI / 3) + z);
+    coords->x = (int)round((coords->x - coords->y) * cos(M_PI / 4));
+    coords->y = (int)round((coords->x + coords->y) * sin(M_PI / 6) + z);
 }
 
 void    set_point(t_coords *pt1, t_coords *pt2, t_fdf *fdf)
 {
     int scale_w;
-    int scale_h;
+    int shiftx;
+    int shifty;
     int z1;
     int z2;
 
     z1 = fdf->map[pt1->y][pt1->x];
     z2 = fdf->map[pt2->y][pt2->x];
-    scale_w = WIN_W / (fdf->width + 6);
-    scale_h = WIN_H / (fdf->height + 6);
+    scale_w = WIN_W / (fdf->height * 1.5);
+    shiftx = WIN_H / 4;
+    shifty = WIN_W / 4;
     pt1->x = (pt1->x * scale_w); //+ scale_w * 4;
     pt1->y = (pt1->y * scale_w); //+ scale_h * 2;
     pt2->x = (pt2->x * scale_w); //+ scale_w * 4;
@@ -182,6 +184,11 @@ void    set_point(t_coords *pt1, t_coords *pt2, t_fdf *fdf)
     isometric_view(pt2, z2);
     /* parallel_view(pt1, z1);
     parallel_view(pt2, z2); */
+    /* pt1->x = (pt1->x + shiftx);
+    pt1->y = (pt1->y + shifty);
+    pt2->x = (pt2->x + shiftx);
+    pt1->y = (pt1->y + shifty); */
+
 }
 
 int check_points(int x, int x2)
@@ -281,7 +288,7 @@ int main(int argc, char **argv)
     draw_lines(fdf);
     //line_algorithm(fdf, set_coords(1, 1), set_coords(1, 2));
     mlx_loop(fdf->mlx);
-    while (i < fdf->height)
+    /* while (i < fdf->height)
     {
         j = 0;
         while (j < fdf->width)
@@ -291,6 +298,6 @@ int main(int argc, char **argv)
         }
         printf("\n");
         i++;
-    }
+    } */
     return(0);
 }
