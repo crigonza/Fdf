@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:25:36 by crigonza          #+#    #+#             */
-/*   Updated: 2022/09/15 08:10:51 by crigonza         ###   ########.fr       */
+/*   Updated: 2022/09/15 19:36:32 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int get_width(char *file)
     width = 1;
     fd = open(file, O_RDONLY);
     line = get_next_line(fd);
+    if (line[i] == ' ')
+        i++;
     while(line[i] != '\n')
     {
         if (line[i] == ' ' && line[i + 1] != ' ' && line[i + 1] != '\n')
@@ -159,8 +161,8 @@ void    parallel_view(t_coords *coords, int z)
 
 void    isometric_view(t_coords *coords, int z)
 {
-    coords->x = (int)round((coords->x - coords->y) * cos(M_PI / 4));
-    coords->y = (int)round((coords->x + coords->y) * sin(M_PI / 6) + z);
+    coords->x = (int)round((coords->x - coords->y) * cos(M_PI / 3));
+    coords->y = (int)round((coords->x + coords->y) * sin(M_PI / 7) - z);
 }
 
 void    set_point(t_coords *pt1, t_coords *pt2, t_fdf *fdf)
@@ -173,21 +175,21 @@ void    set_point(t_coords *pt1, t_coords *pt2, t_fdf *fdf)
 
     z1 = fdf->map[pt1->y][pt1->x];
     z2 = fdf->map[pt2->y][pt2->x];
-    scale_w = WIN_W / (fdf->height * 1.5);
-    shiftx = WIN_H / 4;
-    shifty = WIN_W / 4;
-    pt1->x = (pt1->x * scale_w); //+ scale_w * 4;
-    pt1->y = (pt1->y * scale_w); //+ scale_h * 2;
-    pt2->x = (pt2->x * scale_w); //+ scale_w * 4;
-    pt2->y = (pt2->y * scale_w); //+ scale_h * 2;
+    scale_w = (int)round(WIN_W / (fdf->height * 1.2));
+    shiftx = WIN_H / 1.2;
+    shifty = (int)round(WIN_W / 4.5);
+    pt1->x = (pt1->x * scale_w);
+    pt1->y = (pt1->y * scale_w);
+    pt2->x = (pt2->x * scale_w);
+    pt2->y = (pt2->y * scale_w);
     isometric_view(pt1, z1);
     isometric_view(pt2, z2);
     /* parallel_view(pt1, z1);
     parallel_view(pt2, z2); */
-    /* pt1->x = (pt1->x + shiftx);
-    pt1->y = (pt1->y + shifty);
+    pt1->x = (pt1->x + shiftx);
+    pt1->y = (pt1->y + 150);
     pt2->x = (pt2->x + shiftx);
-    pt1->y = (pt1->y + shifty); */
+    pt2->y = (pt2->y + 150);
 
 }
 
