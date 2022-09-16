@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:25:36 by crigonza          #+#    #+#             */
-/*   Updated: 2022/09/15 19:36:32 by crigonza         ###   ########.fr       */
+/*   Updated: 2022/09/16 19:48:29 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,34 @@ int	**alloc_map(int height, int width)
 	return (tmp);
 }
 
+char **alloc_color(int height, int width)
+{
+    char    **tmp;
+	int	    i;
+
+	i = 0;
+	tmp = ft_calloc(height, sizeof(char *));
+	if (!tmp)
+		return (0);
+	while (i < height)
+	{
+		tmp[i] = ft_calloc(width, sizeof(char));
+		if (!tmp[i])
+		{
+			return (0);
+		}
+		i++;
+	}
+	return (tmp);
+}
+void get_colors(char *str, t_fdf *fdf, int i, int j)
+{
+    char **split;
+
+    split = ft_split(str, ',');
+    printf("%s ", split[1]);
+    ft_strlcpy(fdf->color_inc[i][j], split[1], ft_strlen(split[1]));
+}
 void    parser(t_fdf *fdf, char *file)
 {
     char    *map_line;
@@ -113,6 +141,7 @@ void    parser(t_fdf *fdf, char *file)
     fdf->width = get_width(file);
     fdf->height = get_height(file);
     fdf->map = alloc_map(fdf->height, fdf->width);
+    fdf->color_inc = alloc_color(fdf->height, fdf->width);
     fd = open(file, O_RDONLY);
     i = 0;
     while (i < fdf->height)
@@ -131,6 +160,7 @@ void    parser(t_fdf *fdf, char *file)
         while (split_line[j])
         {
             fdf->map[i][j] = ft_atoi(split_line[j]);
+            get_colors(split_line[i], fdf, i, j);
             j++;
         }
         i++; 
@@ -287,7 +317,7 @@ int main(int argc, char **argv)
         i++;
     } */
     
-    draw_lines(fdf);
+    //draw_lines(fdf);
     //line_algorithm(fdf, set_coords(1, 1), set_coords(1, 2));
     mlx_loop(fdf->mlx);
     /* while (i < fdf->height)
@@ -295,7 +325,7 @@ int main(int argc, char **argv)
         j = 0;
         while (j < fdf->width)
         {
-            printf("%d ", fdf->map[i][j]);
+            printf("%s ", fdf->color_inc[i][j]);
             j++;
         }
         printf("\n");

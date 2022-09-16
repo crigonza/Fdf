@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:40:19 by crigonza          #+#    #+#             */
-/*   Updated: 2022/09/11 20:09:32 by crigonza         ###   ########.fr       */
+/*   Updated: 2022/09/16 19:35:19 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ typedef struct s_fdf
     int         width;
     int         color;
     mlx_t        *mlx;
-    void        *window;
+    char        **color_inc;
     mlx_image_t       *img;
 }   t_fdf;
 
