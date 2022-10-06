@@ -6,23 +6,23 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:56:46 by crigonza          #+#    #+#             */
-/*   Updated: 2022/09/23 18:51:55 by crigonza         ###   ########.fr       */
+/*   Updated: 2022/10/04 18:33:35 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-int	get_width(char *file)
+int	get_width(char *line)
 {
-	char	*line;
-	int		fd;
+	//char	*line;
+	//int		fd;
 	int		i;
 	int		width;
 
 	i = 0;
 	width = 1;
-	fd = open(file, O_RDONLY);
-	line = get_next_line(fd);
+	//fd = open(file, O_RDONLY);
+	//line = get_next_line(fd);
 	if (line[i] == ' ')
 		i++;
 	while (line[i] != '\n')
@@ -31,8 +31,8 @@ int	get_width(char *file)
 			width++;
 		i++;
 	}
-	free(line);
-	close(fd);
+	//free(line);
+	//close(fd);
 	return (width);
 }
 
@@ -83,15 +83,20 @@ void	parser(t_fdf *fdf, char *file)
 	int j;
 	int fd;
 
-	fdf->width = get_width(file);
+	//fdf->width = get_width(file);
 	fdf->height = get_height(file);
-	fdf->map = allocate_map(fdf->height, fdf->width);
+	//fdf->map = allocate_map(fdf->height, fdf->width);
 	fd = open(file, O_RDONLY);
 	i = 0;
 	while (i < fdf->height)
 	{
 		j = 0;
 		map_line = get_next_line(fd);
+		if (!fdf->width)
+			{
+				fdf->width = get_width(map_line);
+				fdf->map = allocate_map(fdf->height, fdf->width);
+			}
 		split_line = ft_split(map_line, ' ');
 		j = 0;
 		while (split_line[j])

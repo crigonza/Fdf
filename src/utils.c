@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:54:23 by crigonza          #+#    #+#             */
-/*   Updated: 2022/09/20 18:59:13 by crigonza         ###   ########.fr       */
+/*   Updated: 2022/10/05 17:44:24 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,16 @@ void    map_error(void)
 {
     ft_putendl_fd("Invalid Map", 1);
     exit(0);
+}
+
+t_coords	set_coords(int x, int y, t_fdf *fdf)
+{
+	t_coords	coords;
+
+	coords.x = x;
+	coords.y = y;
+	coords.z = fdf->map[y][x];
+	coords.color = get_color(&coords, fdf);
+	return (coords);
 }
 

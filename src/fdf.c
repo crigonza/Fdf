@@ -6,41 +6,11 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:25:36 by crigonza          #+#    #+#             */
-/*   Updated: 2022/09/23 18:58:11 by crigonza         ###   ########.fr       */
+/*   Updated: 2022/10/05 21:10:21 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
-
-void	control_keys(mlx_key_data_t keydata, t_fdf *fdf)
-{
-	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
-		mlx_close_window(fdf->mlx);
-	if (keydata.key == MLX_KEY_Q && keydata.action == MLX_PRESS)
-		fdf->alpha += 0.05;
-	if (keydata.key == MLX_KEY_W && keydata.action == MLX_PRESS)
-		fdf->alpha -= 0.05;
-	if (keydata.key == MLX_KEY_A && keydata.action == MLX_PRESS)
-		fdf->beta += 0.05;
-	if (keydata.key == MLX_KEY_S && keydata.action == MLX_PRESS)
-		fdf->beta -= 0.05;
-	if (keydata.key == MLX_KEY_Z && keydata.action == MLX_PRESS)
-		fdf->gamma += 0.05;
-	if (keydata.key == MLX_KEY_X && keydata.action == MLX_PRESS)
-		fdf->gamma -= 0.05;
-	if (keydata.key == MLX_KEY_O && keydata.action == MLX_PRESS)
-		fdf->scale += 1;
-	if (keydata.key == MLX_KEY_P && keydata.action == MLX_PRESS)
-		fdf->scale -= 1;
-	if (keydata.key == MLX_KEY_UP && keydata.action == MLX_PRESS)
-		fdf->shifty -= 10;
-	if (keydata.key == MLX_KEY_DOWN && keydata.action == MLX_PRESS)
-		fdf->shifty += 10;
-	if (keydata.key == MLX_KEY_LEFT && keydata.action == MLX_PRESS)
-		fdf->shiftx -= 10;
-	if (keydata.key == MLX_KEY_RIGHT && keydata.action == MLX_PRESS)
-		fdf->shiftx += 10;
-}
 
 void	background(t_fdf *fdf)
 {
@@ -60,6 +30,31 @@ void	background(t_fdf *fdf)
 	}
 }
 
+void	free2(int *map, int w)
+{
+	int i;
+
+	i = 0;
+	while (i < w)
+	{
+		free(map[i]);
+		i++;
+	}
+}
+
+void	free_exit(int **map, int h, int w)
+{
+	int	i;
+	
+	i = 0;
+	while (i < h)
+	{
+		free2(map[i], w);
+		i++;
+	}
+	free (map);
+}
+
 void	initialize(t_fdf *fdf)
 {
 	if (fdf->width > fdf->height * 1.5)
@@ -72,6 +67,8 @@ void	initialize(t_fdf *fdf)
 		fdf->scale = (int)round(WIN_W / (fdf->height * 1.7));
 		fdf->shiftx = WIN_W / 2.1;
 	}
+	fdf->projection = 0;
+	fdf->ncolor = 0;
 	fdf->shifty = WIN_H / 9;
 	fdf->alpha = 0;
 	fdf->beta = 0;
@@ -87,7 +84,9 @@ void	controls_text(t_fdf *fdf)
 	mlx_put_string(fdf->mlx, "PRESS Q-W FOR X AXIS", 50, 110);
 	mlx_put_string(fdf->mlx, "PRESS A-W FOR Y AXIS", 50, 130);
 	mlx_put_string(fdf->mlx, "PRESS Z-X FOR Z AXIS", 50, 150);
-    mlx_put_string(fdf->mlx, "PRESS ESC TO EXIT", 50, 170);
+    mlx_put_string(fdf->mlx, "PRESS C TO CHANGE COLORS", 50, 170);
+    mlx_put_string(fdf->mlx, "PRESS ESC TO EXIT", 50, 190);
+
 }
 
 int	main(int argc, char **argv)
@@ -113,7 +112,7 @@ int	main(int argc, char **argv)
 	draw_lines(fdf);
 	controls_text(fdf);
 	//hook (fdf);
-	mlx_key_hook(fdf->mlx, &control_keys, fdf);
+	mlx_key_hook(fdf->mlx, &control_keys1, fdf);
 	/* while (i < fdf->height)
     {
         j = 0;
@@ -128,18 +127,27 @@ int	main(int argc, char **argv)
 	//line_algorithm(fdf, set_coords(1, 1), set_coords(1, 2));
 	mlx_loop_hook(fdf->mlx, &draw_lines, fdf);
 	mlx_loop(fdf->mlx);
+	//mlx_close_hook(fdf->mlx, &draw_lines, fdf);
 	mlx_delete_image(fdf->mlx, fdf->img);
+	mlx_close_window(fdf->mlx);
 	mlx_terminate(fdf->mlx);
+	//free_exit(fdf->map, fdf->height, fdf->width);
+	//free(fdf->mlx);
+	//free(fdf->img);
+	ft_memset(fdf->img->pixels, 0, WIN_W * WIN_H * sizeof(int));
+	free(fdf->map);
+	free(fdf);
 	/* while (i < fdf->height)
     {
         j = 0;
         while (j < fdf->width)
         {
-            printf("%s ", fdf->color_inc[i][j]);
+            printf("%d ", fdf->map[i][j]);
             j++;
         }
         printf("\n");
         i++;
     } */
+	//free_exit(fdf->map, fdf);
 	return (EXIT_SUCCESS);
 }
