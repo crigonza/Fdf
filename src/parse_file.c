@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:56:46 by crigonza          #+#    #+#             */
-/*   Updated: 2022/10/04 18:33:35 by crigonza         ###   ########.fr       */
+/*   Updated: 2022/11/03 08:17:47 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,11 +88,12 @@ void	parser(t_fdf *fdf, char *file)
 	//fdf->map = allocate_map(fdf->height, fdf->width);
 	fd = open(file, O_RDONLY);
 	i = 0;
+	fdf->width = 0;
 	while (i < fdf->height)
 	{
 		j = 0;
 		map_line = get_next_line(fd);
-		if (!fdf->width)
+		if (fdf->width == 0)
 			{
 				fdf->width = get_width(map_line);
 				fdf->map = allocate_map(fdf->height, fdf->width);

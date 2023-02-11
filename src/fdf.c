@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:25:36 by crigonza          #+#    #+#             */
-/*   Updated: 2022/10/05 21:10:21 by crigonza         ###   ########.fr       */
+/*   Updated: 2022/11/03 21:39:55 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,8 @@ int	main(int argc, char **argv)
 {
 	t_fdf *fdf;
 	//mlx_image_t *fdf->img;
-	int i = 0;
-	int j = 0;
+	//int i = 0;
+	//int j = 0;
 
 	fdf = (t_fdf *)malloc(sizeof(t_fdf));
 	if (argc != 2)
@@ -127,16 +127,16 @@ int	main(int argc, char **argv)
 	//line_algorithm(fdf, set_coords(1, 1), set_coords(1, 2));
 	mlx_loop_hook(fdf->mlx, &draw_lines, fdf);
 	mlx_loop(fdf->mlx);
-	//mlx_close_hook(fdf->mlx, &draw_lines, fdf);
+	mlx_close_hook(fdf->mlx, &draw_lines, fdf);
 	mlx_delete_image(fdf->mlx, fdf->img);
 	mlx_close_window(fdf->mlx);
 	mlx_terminate(fdf->mlx);
 	//free_exit(fdf->map, fdf->height, fdf->width);
 	//free(fdf->mlx);
 	//free(fdf->img);
-	ft_memset(fdf->img->pixels, 0, WIN_W * WIN_H * sizeof(int));
-	free(fdf->map);
-	free(fdf);
+	//ft_memset(fdf->img->pixels, 0, WIN_W * WIN_H * sizeof(int));
+	//free(fdf->map);
+	//free(fdf);
 	/* while (i < fdf->height)
     {
         j = 0;
