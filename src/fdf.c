@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: cristobal <cristobal@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:25:36 by crigonza          #+#    #+#             */
-/*   Updated: 2022/11/03 21:39:55 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/02/18 22:00:41 by cristobal        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,18 @@ void	free2(int *map, int w)
 
 void	free_exit(int **map, int h, int w)
 {
+	/* int i = 0;
+	while (map[i])
+	{
+		free(map[i]);
+		i++;
+	} */
 	int	i;
-	
+
 	i = 0;
 	while (i < h)
 	{
-		free2(map[i], w);
+		free(map[i]);
 		i++;
 	}
 	free (map);
@@ -130,13 +136,13 @@ int	main(int argc, char **argv)
 	mlx_close_hook(fdf->mlx, &draw_lines, fdf);
 	mlx_delete_image(fdf->mlx, fdf->img);
 	mlx_close_window(fdf->mlx);
-	mlx_terminate(fdf->mlx);
-	//free_exit(fdf->map, fdf->height, fdf->width);
+	//mlx_terminate(fdf->mlx);
+	free_exit(fdf->map, fdf->height, fdf->width);
 	//free(fdf->mlx);
 	//free(fdf->img);
 	//ft_memset(fdf->img->pixels, 0, WIN_W * WIN_H * sizeof(int));
 	//free(fdf->map);
-	//free(fdf);
+	free(fdf);
 	/* while (i < fdf->height)
     {
         j = 0;
@@ -148,6 +154,8 @@ int	main(int argc, char **argv)
         printf("\n");
         i++;
     } */
-	//free_exit(fdf->map, fdf);
+	//free_exit(fdf->map);
+	
+	system("leaks --l fdf");
 	return (EXIT_SUCCESS);
 }

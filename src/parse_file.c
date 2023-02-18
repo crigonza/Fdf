@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
+/*   By: cristobal <cristobal@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:56:46 by crigonza          #+#    #+#             */
-/*   Updated: 2022/11/03 08:17:47 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/02/18 21:30:14 by cristobal        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,19 @@ int	**allocate_map(int height, int width)
 	return (tmp);
 }
 
+void	free_split(char **split_line)
+{
+	int i;
+
+	i = 0;
+	while (split_line[i])
+	{
+		free(split_line[i]);
+		i++;
+	}
+	free(split_line);
+}
+
 void	parser(t_fdf *fdf, char *file)
 {
 	char *map_line;
@@ -109,7 +122,7 @@ void	parser(t_fdf *fdf, char *file)
 		//printf("\n");
 		i++;
 		free(map_line);
-		free(split_line);
+		free_split(split_line);
 	}
 	close(fd);
 }
