@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   set_map.c                                          :+:      :+:    :+:   */
+/*   set_map_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristobal <cristobal@student.42.fr>        +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:00:11 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/26 21:31:30 by cristobal        ###   ########.fr       */
+/*   Updated: 2023/02/26 22:11:04 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../inc/fdf_bonus.h"
 
 void	isometric_view(t_coords *coords)
 {

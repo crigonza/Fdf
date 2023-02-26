@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristobal <cristobal@student.42.fr>        +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:54:23 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/23 18:59:16 by cristobal        ###   ########.fr       */
+/*   Updated: 2023/02/26 22:11:11 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../inc/fdf_bonus.h"
 
 int	check_points(int x, int x2)
 {

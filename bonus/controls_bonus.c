@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   controls.c                                         :+:      :+:    :+:   */
+/*   controls_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristobal <cristobal@student.42.fr>        +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:12:34 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/19 13:02:05 by cristobal        ###   ########.fr       */
+/*   Updated: 2023/02/26 22:10:25 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../inc/fdf_bonus.h"
 
 void	set_projection(t_fdf *fdf)
 {

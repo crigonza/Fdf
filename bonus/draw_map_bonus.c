@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_map.c                                         :+:      :+:    :+:   */
+/*   draw_map_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristobal <cristobal@student.42.fr>        +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 20:05:05 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/23 18:21:39 by cristobal        ###   ########.fr       */
+/*   Updated: 2023/02/26 22:10:37 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../inc/fdf_bonus.h"
 
 void	put_pixel(t_fdf *fdf, t_coords *pt1, t_coords *pt2, double dist)
 {

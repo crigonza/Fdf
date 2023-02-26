@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   color.c                                            :+:      :+:    :+:   */
+/*   color_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristobal <cristobal@student.42.fr>        +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:23:32 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/26 21:34:23 by cristobal        ###   ########.fr       */
+/*   Updated: 2023/02/26 22:10:10 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../inc/fdf_bonus.h"
 
 int	get_red(int rgba)
 {

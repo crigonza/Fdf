@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_file.c                                       :+:      :+:    :+:   */
+/*   parse_file_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristobal <cristobal@student.42.fr>        +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:56:46 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/23 18:59:19 by cristobal        ###   ########.fr       */
+/*   Updated: 2023/02/26 22:10:56 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../inc/fdf_bonus.h"
 
 int	get_width(char *line)
 {

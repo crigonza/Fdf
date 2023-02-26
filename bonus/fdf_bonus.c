@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.c                                              :+:      :+:    :+:   */
+/*   fdf_bonus.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:25:36 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/26 22:15:27 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/02/26 22:10:47 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../inc/fdf.h"
+#include "../inc/fdf_bonus.h"
 
 void	background(t_fdf *fdf)
 {
@@ -96,8 +96,8 @@ int	main(int argc, char **argv)
 	fdf->img = mlx_new_image(fdf->mlx, WIN_W, WIN_H);
 	mlx_image_to_window(fdf->mlx, fdf->img, 0, 0);
 	draw_lines(fdf);
-	//controls_text(fdf);
-	//mlx_key_hook(fdf->mlx, &control_keys1, fdf);
+	controls_text(fdf);
+	mlx_key_hook(fdf->mlx, &control_keys1, fdf);
 	mlx_loop_hook(fdf->mlx, &draw_lines, fdf);
 	mlx_loop(fdf->mlx);
 	free_exit(fdf);
