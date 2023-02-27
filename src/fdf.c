@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:25:36 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/26 22:15:27 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/02/27 08:41:22 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,25 +59,8 @@ void	initialize(t_fdf *fdf)
 		fdf->scale = (int)round(WIN_W / (fdf->height * 1.7));
 		fdf->shiftx = WIN_W / 2.1;
 	}
-	fdf->projection = 0;
 	fdf->ncolor = 0;
 	fdf->shifty = WIN_H / 9;
-	fdf->alpha = 0;
-	fdf->beta = 0;
-	fdf->gamma = 0;
-}
-
-void	controls_text(t_fdf *fdf)
-{
-	mlx_put_string(fdf->mlx, "PRESS SPACE FOR CHANGE PERSPECTIVE", 50, 30);
-	mlx_put_string(fdf->mlx, "PRESS ARROW KEYS TO MOVE MAP", 50, 50);
-	mlx_put_string(fdf->mlx, "PRESS O-P KEYS TO ZOOM IN-OUT", 50, 70);
-	mlx_put_string(fdf->mlx, "ROTATION:", 50, 90);
-	mlx_put_string(fdf->mlx, "PRESS Q-W FOR X AXIS", 50, 110);
-	mlx_put_string(fdf->mlx, "PRESS A-S FOR Y AXIS", 50, 130);
-	mlx_put_string(fdf->mlx, "PRESS Z-X FOR Z AXIS", 50, 150);
-	mlx_put_string(fdf->mlx, "PRESS C TO CHANGE COLORS", 50, 170);
-	mlx_put_string(fdf->mlx, "PRESS ESC TO EXIT", 50, 190);
 }
 
 int	main(int argc, char **argv)
@@ -96,8 +79,7 @@ int	main(int argc, char **argv)
 	fdf->img = mlx_new_image(fdf->mlx, WIN_W, WIN_H);
 	mlx_image_to_window(fdf->mlx, fdf->img, 0, 0);
 	draw_lines(fdf);
-	//controls_text(fdf);
-	//mlx_key_hook(fdf->mlx, &control_keys1, fdf);
+	mlx_key_hook(fdf->mlx, &control_keys1, fdf);
 	mlx_loop_hook(fdf->mlx, &draw_lines, fdf);
 	mlx_loop(fdf->mlx);
 	free_exit(fdf);

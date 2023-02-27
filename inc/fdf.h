@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:40:19 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/26 22:08:22 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/02/27 08:51:34 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,6 @@ int				**allocate_map(int height, int width);
 void			split_to_map(t_fdf *fdf, char **split_line, int i);
 void			parser(t_fdf *fdf, char *file);
 //set_map.c
-int				gradient(int color1, int color2, double dist);
-void			rotation(t_coords *coord, t_fdf *fdf);
-void			projection(t_coords *coords, t_fdf *fdf);
 void			isometric_view(t_coords *coords);
 void			set_point(t_coords *pt1, t_coords *pt2, t_fdf *fdf);
 //draw_map.c
@@ -87,21 +84,18 @@ void			map_error(void);
 void			free_split(char **split_line);
 t_coords		set_coords(int x, int y, t_fdf *fdf);
 //controls.c
-void			set_projection(t_fdf *fdf);
 void			set_color(t_fdf *fdf);
 void			control_keys1(mlx_key_data_t keydata, t_fdf *fdf);
-void			control_keys2(mlx_key_data_t keydata, t_fdf *fdf);
 //color.c
 int				get_red(int rgba);
 int				get_green(int rgba);
 int				get_blue(int rgba);
+int				gradient(int color1, int color2, double dist);
 int				get_color(t_coords *pt, t_fdf *fdf);
-int				color2(t_coords *pt, t_fdf *fdf);
 //fdf.c
 int				main(int argc, char **argv);
 void			background(t_fdf *fdf);
 void			free_exit(t_fdf *fdf);
 void			initialize(t_fdf *fdf);
-void			controls_text(t_fdf *fdf);
 
 #endif

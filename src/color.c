@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristobal <cristobal@student.42.fr>        +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/05 17:23:32 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/26 21:34:23 by cristobal        ###   ########.fr       */
+/*   Updated: 2023/02/27 08:43:28 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,24 +27,18 @@ int	get_blue(int rgba)
 	return ((rgba >> 8) & 0xFF);
 }
 
-int	color2(t_coords *pt, t_fdf *fdf)
+int	gradient(int color1, int color2, double dist)
 {
-	if (pt->z <= 1)
-		return (0xFFC05CFF);
-	if (pt->z > 1 && pt->z < 3)
-		return (0xFFB133FF);
-	if (pt->z > 2 && pt->z < 6)
-		return (0xFFA10AFF);
-	if (pt->z > 5 && pt->z < 10)
-		return (0xF2545BFF);
-	if (pt->z > 9 && pt->z < 20)
-		return (0xEE1B26FF);
-	if (pt->z > 19 && pt->z < 50)
-		return (0x6E4555FF);
-	if (pt->z > 49 && pt->z < 100)
-		return (0x084C61FF);
-	if (pt->z > 99)
-		return (0x177E89FF);
+	int	color[4];
+
+	color[0] = (int)round((1 - dist) * get_red(color1) + dist
+			* get_red(color2));
+	color[1] = (int)round((1 - dist) * get_green(color1) + dist
+			* get_green(color2));
+	color[2] = (int)round((1 - dist) * get_blue(color1) + dist
+			* get_blue(color2));
+	color[3] = color2 & 0xFF;
+	return (color[0] << 24 | color[1] << 16 | color[2] << 8 | color[3]);
 }
 
 int	get_color(t_coords *pt, t_fdf *fdf)
@@ -66,7 +60,5 @@ int	get_color(t_coords *pt, t_fdf *fdf)
 		if (pt->z > 109 && pt->z < 180)
 			return (0x0B4611FF);
 	}
-	else if (fdf->ncolor == 1)
-		return (color2(pt, fdf));
 	return (0xffffffFF);
 }
