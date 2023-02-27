@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:40:19 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/27 08:55:43 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:55:06 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,10 +83,11 @@ int				line_algorithm_2(t_coords *pt1, t_coords *pt2, t_algor *algo,
 //utils_bonus.c
 int				abs_val(int num);
 int				check_points(int x, int x2);
-void			map_error(void);
+void			check_map(char *argv);
 void			free_split(char **split_line);
 t_coords		set_coords(int x, int y, t_fdf *fdf);
 //controls_bonus.c
+int				scale_control(t_fdf *fdf);
 void			set_projection(t_fdf *fdf);
 void			set_color(t_fdf *fdf);
 void			control_keys1(mlx_key_data_t keydata, t_fdf *fdf);

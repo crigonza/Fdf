@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:25:36 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/26 22:10:47 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/02/27 14:14:10 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ int	main(int argc, char **argv)
 	t_fdf	*fdf;
 
 	fdf = (t_fdf *)malloc(sizeof(t_fdf));
+	check_map(argv[1]);
 	if (argc != 2)
 	{
 		ft_putendl_fd("Invalid arguments number", 2);

@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:12:34 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/26 22:10:25 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/02/27 12:37:21 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,16 @@ void	set_color(t_fdf *fdf)
 		fdf->ncolor = 0;
 }
 
+int	scale_control(t_fdf *fdf)
+{
+	if (fdf->width > 250 && fdf->scale < 2)
+		return (0);
+	if (fdf->width > 80 && fdf->width < 250 && fdf->scale < 4)
+		return (0);
+	else
+		return (1);
+}
+
 void	control_keys1(mlx_key_data_t keydata, t_fdf *fdf)
 {
 	if (keydata.key == MLX_KEY_ESCAPE && keydata.action == MLX_PRESS)
@@ -51,7 +61,7 @@ void	control_keys1(mlx_key_data_t keydata, t_fdf *fdf)
 	if (keydata.key == MLX_KEY_O && keydata.action == MLX_PRESS)
 		fdf->scale += 1;
 	if (keydata.key == MLX_KEY_P && keydata.action == MLX_PRESS)
-		fdf->scale -= 1;
+		fdf->scale -= scale_control(fdf);
 	control_keys2(keydata, fdf);
 }
 

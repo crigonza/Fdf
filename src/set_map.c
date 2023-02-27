@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 19:00:11 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/27 08:43:35 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/02/27 11:44:15 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,8 @@ void	set_point(t_coords *pt1, t_coords *pt2, t_fdf *fdf)
 {
 	pt1->x = (pt1->x * fdf->scale);
 	pt1->y = (pt1->y * fdf->scale);
-	pt1->z = (pt1->z * fdf->scale / 8);
 	pt2->x = (pt2->x * fdf->scale);
 	pt2->y = (pt2->y * fdf->scale);
-	pt2->z = (pt2->z * fdf->scale / 8);
 	isometric_view(pt1);
 	isometric_view(pt2);
 	pt1->x = (pt1->x + fdf->shiftx);

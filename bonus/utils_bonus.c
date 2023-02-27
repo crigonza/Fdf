@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:54:23 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/26 22:11:11 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/02/27 14:46:04 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,20 @@ int	abs_val(int num)
 	return (num);
 }
 
-void	map_error(void)
+void	check_map(char *argv)
 {
-	ft_putendl_fd("Invalid Map", 1);
-	exit(0);
+	char	*tmp;
+	char	*str;
+	int		i;
+
+	i = 0;
+	str = ".fdf";
+	tmp = ft_strnstr(argv, str, ft_strlen(argv));
+	if (tmp == NULL)
+	{
+		ft_putendl_fd("Invalid Map Archive", 1);
+		exit(0);
+	}
 }
 
 void	free_split(char **split_line)
