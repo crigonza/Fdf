@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 15:40:19 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/27 12:55:06 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:56:10 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "../GNL/get_next_line.h"
 # include "../MLX42/include/MLX42/MLX42.h"
-# include "../libft/libft.h"
+# include "../Libft/libft.h"
 # include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
@@ -65,7 +65,7 @@ int				get_width(char *line);
 int				get_height(char *file);
 int				**allocate_map(int height, int width);
 void			split_to_map(t_fdf *fdf, char **split_line, int i);
-void			parser(t_fdf *fdf, char *file);
+void			parser(t_fdf *fdf, char *file, int fd);
 //set_map_bonus.c
 int				gradient(int color1, int color2, double dist);
 void			rotation(t_coords *coord, t_fdf *fdf);
@@ -83,7 +83,7 @@ int				line_algorithm_2(t_coords *pt1, t_coords *pt2, t_algor *algo,
 //utils_bonus.c
 int				abs_val(int num);
 int				check_points(int x, int x2);
-void			check_map(char *argv);
+int				check_map(char *argv, int argc);
 void			free_split(char **split_line);
 t_coords		set_coords(int x, int y, t_fdf *fdf);
 //controls_bonus.c

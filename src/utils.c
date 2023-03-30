@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristobal <cristobal@student.42.fr>        +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:54:23 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/23 18:59:16 by cristobal        ###   ########.fr       */
+/*   Updated: 2023/03/30 11:49:57 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,27 @@ int	abs_val(int num)
 	return (num);
 }
 
-void	map_error(void)
+int	check_map(char *argv, int argc)
 {
-	ft_putendl_fd("Invalid Map", 1);
-	exit(0);
+	char	*tmp;
+	char	*str;
+	int		fd;
+	int		i;
+
+	i = 0;
+	str = ".fdf";
+	if (argc != 2)
+	{
+		ft_putendl_fd("Invalid arguments number", 2);
+		return (-1);
+	}
+	tmp = ft_strnstr(argv, str, ft_strlen(argv));
+	if (tmp == NULL)
+	{
+		ft_putendl_fd("Invalid Map Archive", 1);
+		return (-1);
+	}
+	return (0);
 }
 
 void	free_split(char **split_line)

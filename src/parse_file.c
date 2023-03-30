@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_file.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cristobal <cristobal@student.42.fr>        +#+  +:+       +#+        */
+/*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:56:46 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/23 18:59:19 by cristobal        ###   ########.fr       */
+/*   Updated: 2023/03/30 11:43:58 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,19 +81,16 @@ void	split_to_map(t_fdf *fdf, char **split_line, int i)
 	}
 }
 
-void	parser(t_fdf *fdf, char *file)
+void	parser(t_fdf *fdf, char *file, int fd)
 {
 	char	*map_line;
 	char	**split_line;
 	int		i;
-	int		j;
-	int		fd;
 
-	fdf->height = get_height(file);
-	fd = open(file, O_RDONLY);
-	i = 0;
+	i = -1;
 	fdf->width = 0;
-	while (i < fdf->height)
+	fdf->height = get_height(file);
+	while (++i < fdf->height)
 	{
 		map_line = get_next_line(fd);
 		if (fdf->width == 0)
@@ -103,7 +100,6 @@ void	parser(t_fdf *fdf, char *file)
 		}
 		split_line = ft_split(map_line, ' ');
 		split_to_map(fdf, split_line, i);
-		i++;
 		free(map_line);
 		free_split(split_line);
 	}

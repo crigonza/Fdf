@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/13 19:25:36 by crigonza          #+#    #+#             */
-/*   Updated: 2023/02/27 14:14:10 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/03/30 11:54:02 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,15 +83,18 @@ void	controls_text(t_fdf *fdf)
 int	main(int argc, char **argv)
 {
 	t_fdf	*fdf;
+	int		fd;
 
 	fdf = (t_fdf *)malloc(sizeof(t_fdf));
-	check_map(argv[1]);
-	if (argc != 2)
+	if (check_map(argv[1], argc) == -1)
+		exit(EXIT_FAILURE);
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
 	{
-		ft_putendl_fd("Invalid arguments number", 2);
-		exit(0);
+		ft_putendl_fd("Invalid Map Archive", 1);
+		exit(EXIT_FAILURE);
 	}
-	parser(fdf, argv[1]);
+	parser(fdf, argv[1], fd);
 	initialize(fdf);
 	fdf->mlx = mlx_init(WIN_W, WIN_H, "Fdf", true);
 	fdf->img = mlx_new_image(fdf->mlx, WIN_W, WIN_H);
@@ -102,6 +105,5 @@ int	main(int argc, char **argv)
 	mlx_loop_hook(fdf->mlx, &draw_lines, fdf);
 	mlx_loop(fdf->mlx);
 	free_exit(fdf);
-	system("leaks -q fdf");
-	return (EXIT_SUCCESS);
+	exit(EXIT_SUCCESS);
 }
