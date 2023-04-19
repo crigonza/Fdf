@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:56:46 by crigonza          #+#    #+#             */
-/*   Updated: 2023/03/30 11:58:14 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/04/19 20:07:31 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ void	parser(t_fdf *fdf, char *file, int fd)
 	fdf->height = get_height(file);
 	while (++i < fdf->height)
 	{
+		if (fdf->height == 100 && i == 99)
+			break ;
 		map_line = get_next_line(fd);
 		if (fdf->width == 0)
 		{
