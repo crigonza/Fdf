@@ -5,34 +5,49 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/19 20:06:08 by crigonza          #+#    #+#             */
-/*   Updated: 2023/04/19 20:06:09 by crigonza         ###   ########.fr       */
+/*   Created: 2023/04/19 20:46:31 by crigonza          #+#    #+#             */
+/*   Updated: 2023/04/19 20:46:55 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "get_next_line.h"
+#include <unistd.h>
 
-char    *get_next_line(int fd)
+char	*ft_read_to_left_str(int fd, char *left_str)
 {
-    int     i;
-    int     rd;
-    char    character;
-    char    *buffer;
+	char	*buff;
+	int		rd_bytes;
 
-    i = 0;
-    rd = 0;
-    buffer = malloc(100000);
-    if (BUFFER_SIZE <= 0)
-        return (NULL);
-    while ((rd = read(fd, &character, BUFFER_SIZE - BUFFER_SIZE + 1)) > 0)
-    {
-        buffer[i++] = character;
-        if (character == '\n')
-            break ;
-    }
-    buffer[i] = '\0';
-    if (rd == -1 || i == 0 || (!buffer[i - 1] && !rd))
-        return (free(buffer), NULL);
-    return(buffer);
+	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buff)
+		return (NULL);
+	rd_bytes = 1;
+	while (!ft_strchr_(left_str, '\n') && rd_bytes != 0)
+	{
+		rd_bytes = read(fd, buff, BUFFER_SIZE);
+		if (rd_bytes == -1)
+		{
+			free(buff);
+			return (NULL);
+		}
+		buff[rd_bytes] = '\0';
+		left_str = ft_strjoin_(left_str, buff);
+	}
+	free(buff);
+	return (left_str);
+}
+
+char	*get_next_line(int fd)
+{
+	char		*line;
+	static char	*left_str;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	left_str = ft_read_to_left_str(fd, left_str);
+	if (!left_str)
+		return (NULL);
+	line = ft_get_line(left_str);
+	left_str = ft_new_left_str(left_str);
+	return (line);
 }
