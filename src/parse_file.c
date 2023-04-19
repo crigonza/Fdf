@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 19:56:46 by crigonza          #+#    #+#             */
-/*   Updated: 2023/03/30 11:43:58 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:53:57 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void	split_to_map(t_fdf *fdf, char **split_line, int i)
 		fdf->map[i][j] = ft_atoi(split_line[j]);
 		j++;
 	}
+	free_split(split_line);
 }
 
 void	parser(t_fdf *fdf, char *file, int fd)
@@ -93,6 +94,7 @@ void	parser(t_fdf *fdf, char *file, int fd)
 	while (++i < fdf->height)
 	{
 		map_line = get_next_line(fd);
+		//printf("%s", map_line);
 		if (fdf->width == 0)
 		{
 			fdf->width = get_width(map_line);
@@ -101,7 +103,6 @@ void	parser(t_fdf *fdf, char *file, int fd)
 		split_line = ft_split(map_line, ' ');
 		split_to_map(fdf, split_line, i);
 		free(map_line);
-		free_split(split_line);
 	}
 	close(fd);
 }

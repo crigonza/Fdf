@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:54:23 by crigonza          #+#    #+#             */
-/*   Updated: 2023/03/30 11:49:57 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/04/19 16:53:00 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,15 @@ t_coords	set_coords(int x, int y, t_fdf *fdf)
 
 	coords.x = x;
 	coords.y = y;
-	coords.z = fdf->map[y][x];
+	if(fdf->width < 80)
+	{
+		if (fdf->map[4][4] > 20 || fdf->map[1][0] > 20)
+			coords.z = fdf->map[y][x];
+		else
+			coords.z = fdf->map[y][x] * 8;
+	}
+	else
+		coords.z = fdf->map[y][x];
 	coords.color = get_color(&coords, fdf);
 	return (coords);
 }
