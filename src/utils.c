@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:54:23 by crigonza          #+#    #+#             */
-/*   Updated: 2023/04/19 16:53:00 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/04/19 17:44:28 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,15 @@ void	free_split(char **split_line)
 	int	i;
 
 	i = 0;
-	while (split_line[i])
+	if (split_line != NULL)
 	{
-		free(split_line[i]);
-		i++;
+		while (split_line[i])
+		{
+			free(split_line[i]);
+			i++;
+		}
+		free(split_line);
 	}
-	free(split_line);
 }
 
 t_coords	set_coords(int x, int y, t_fdf *fdf)
@@ -69,7 +72,7 @@ t_coords	set_coords(int x, int y, t_fdf *fdf)
 
 	coords.x = x;
 	coords.y = y;
-	if(fdf->width < 80)
+	if (fdf->width < 80)
 	{
 		if (fdf->map[4][4] > 20 || fdf->map[1][0] > 20)
 			coords.z = fdf->map[y][x];
