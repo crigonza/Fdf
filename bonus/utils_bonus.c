@@ -6,7 +6,7 @@
 /*   By: crigonza <crigonza@student.42malaga.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 18:54:23 by crigonza          #+#    #+#             */
-/*   Updated: 2023/04/19 17:48:07 by crigonza         ###   ########.fr       */
+/*   Updated: 2023/04/27 10:41:06 by crigonza         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ t_coords	set_coords(int x, int y, t_fdf *fdf)
 
 	coords.x = x;
 	coords.y = y;
-	if (fdf->width < 80)
+	if (fdf->width < 80 && fdf->width > 4)
 	{
 		if (fdf->map[4][4] > 20 || fdf->map[1][0] > 20)
 			coords.z = fdf->map[y][x];
