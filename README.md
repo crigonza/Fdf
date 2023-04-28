@@ -1,6 +1,6 @@
 # Fdf
 
-Fdf is a project at 42 that aims to create a graphical representation of a terrain in relief using the [MLX42](https://github.com/codam-coding-college/MLX42) library.
+Fdf is a project at 42 that aims to create a graphical representation of a terrain in relief using the codan [MLX42](https://github.com/codam-coding-college/MLX42) library.
 
 ![Fdf representation](https://github.com/crigonza/Fdf/blob/main/fdf.png)
 
