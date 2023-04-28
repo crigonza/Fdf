@@ -28,7 +28,9 @@ To use this program in your own project, you need to provide a map file as an ar
 
 The program will display the map in a window using a perspective projection and a color gradient according to the height of each point.
 
-You can also create your own maps with the .fdf extension or use the default maps that are in the /test_maps folder.
+![42 image](https://github.com/crigonza/Fdf/blob/main/fdf_42.png)
+
+You can create your own maps with the .fdf extension or use the default maps that are in the /test_maps folder.
 ```
 ./fdf test_maps/t1.fdf
 ```
